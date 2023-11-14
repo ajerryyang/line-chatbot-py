@@ -27,7 +27,7 @@ def handle_message(event):
 
     message_text = event.message.text
 
-    if message_text == '@status':
+    if message_text == '回報':
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='This is keyword for @status!'))
