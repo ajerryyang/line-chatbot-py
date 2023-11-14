@@ -24,24 +24,37 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
-    message = TemplateSendMessage(
-        alt_text='Confirm template',
-        template=ConfirmTemplate(
-            text='Are you sure?',
-            actions=[
-                PostbackTemplateAction(
-                    label='postback',
-                    text='postback text',
-                    data='action=buy&itemid=1'
-                ),
-                MessageTemplateAction(
-                    label='message',
-                    text='message text'
-                )
-            ]
+
+    message = TextSendMessage(text=event.message.text)
+    if message == '回報':
+        message = TemplateSendMessage(
+            alt_text='Confirm template',
+            template=ConfirmTemplate(
+                text='Are you sure?',
+                actions=[
+                    PostbackTemplateAction(
+                        label='postback',
+                        text='postback text',
+                        data='action=buy&itemid=1'
+                    ),
+                    MessageTemplateAction(
+                        label='message',
+                        text='message text'
+                    )
+                ]
+            )
         )
-    )
-    line_bot_api.reply_message(event.reply_token, message)
+        line_bot_api.reply_message(event.reply_token, message)
+    else:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='Please input valid keyword!'))
+
+
+    
+
+    
+   
 
 import os
 if __name__ == "__main__":
