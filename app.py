@@ -27,6 +27,24 @@ def handle_message(event):
 
     message_text = event.message.text
 
+    line_bot_api.push_message('你的 user ID', TemplateSendMessage(
+    alt_text='ConfirmTemplate',
+    template=ConfirmTemplate(
+            text='你好嗎？',
+            actions=[
+                MessageAction(
+                    label='好喔',
+                    text='好喔'
+                ),
+                MessageAction(
+                    label='好喔',
+                    text='不好喔'
+                )
+            ]
+        )
+    ))
+
+    
     if message_text == '回報':
         line_bot_api.reply_message(
             event.reply_token,
@@ -40,29 +58,14 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text='This is keyword for @register!'))
     elif message_text == 'hi':
-        line_bot_api.push_message('你的 user ID', TemplateSendMessage(
-        alt_text='ConfirmTemplate',
-        template=ConfirmTemplate(
-                text='你好嗎？',
-                actions=[
-                    MessageAction(
-                        label='好喔',
-                        text='好喔'
-                    ),
-                    MessageAction(
-                        label='好喔',
-                        text='不好喔'
-                    )
-                ]
-            )
-        ))
+         line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='This is keyword for @register!'))
     else:
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='Please input valid keyword!'))
 
-
-    
 
     
    
