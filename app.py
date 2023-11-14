@@ -36,6 +36,14 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='今天特別少!'))
+    elif message_text == '回報生乳含量':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='請輸入今日生乳含量是多少!'))
+    elif message_text == '通知物流':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='已通知物流來領取!'))
     elif message_text == 'hi':
         message = TemplateSendMessage(
         alt_text='Buttons template',
@@ -46,12 +54,12 @@ def handle_message(event):
             actions=[
                 PostbackTemplateAction(
                     label='生乳量',
-                    text='請問生乳含量是多少',
+                    text='回報生乳含量',
                     data='action=buy&itemid=1'
                 ),
                 MessageTemplateAction(
                     label='通知領取',
-                    text='已通知物流來領取'
+                    text='通知物流'
                 ),
                 URITemplateAction(
                     label='官網',
