@@ -28,11 +28,7 @@ def handle_message(event):
     message_text = event.message.text
 
 
-    if message_text == '回報':
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text='請問生乳含量是多少'))
-    elif message_text == '40kg':
+    if message_text == '100kg':
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='今天特別多'))
@@ -40,47 +36,36 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='今天特別少!'))
-    elif message_text == '寄送':
-         line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text='已通知物流來領取'))
-
-    elif message_text == 'test':
+    elif message_text == 'hi':
         message = TemplateSendMessage(
         alt_text='Buttons template',
         template=ButtonsTemplate(
-            thumbnail_image_url='https://example.com/image.jpg',
-            title='Menu',
-            text='Please select',
+            thumbnail_image_url='https://images.squarespace-cdn.com/content/v1/552eefd1e4b0c6b6fbd179cb/1610519910081-99MNAH3AFPQL6RE913IJ/Brown+and+Orange+Neutral+Delicate+Organic+Fashion+Marketing+Presentation.png',
+            title='回報專區',
+            text='請選擇',
             actions=[
                 PostbackTemplateAction(
-                    label='postback',
-                    text='postback text',
+                    label='生乳量',
+                    text='請問生乳含量是多少',
                     data='action=buy&itemid=1'
                 ),
                 MessageTemplateAction(
-                    label='message',
-                    text='message text'
+                    label='通知領取',
+                    text='已通知物流來領取'
                 ),
                 URITemplateAction(
-                    label='uri',
-                    uri='http://example.com/'
+                    label='官網',
+                    uri='https://www.bettermilk.com.tw/'
                 )
                 ]
             )
         )
-        line_bot_api.reply_message(event.reply_token, message)
-
-
-    
+        line_bot_api.reply_message(event.reply_token, message) 
     else:
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='Please input valid keyword!'))
 
-
-    
-   
 
 import os
 if __name__ == "__main__":
