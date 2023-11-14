@@ -25,26 +25,24 @@ def callback():
 def handle_message(event):
 
 
-    message = TextSendMessage(text=event.message.text)
-    if message == '回報':
-        message = TemplateSendMessage(
-            alt_text='Confirm template',
-            template=ConfirmTemplate(
-                text='Are you sure?',
-                actions=[
-                    PostbackTemplateAction(
-                        label='postback',
-                        text='postback text',
-                        data='action=buy&itemid=1'
-                    ),
-                    MessageTemplateAction(
-                        label='message',
-                        text='message text'
-                    )
-                ]
-            )
-        )
-        line_bot_api.reply_message(event.reply_token, message)
+    message_text = event.message.text
+
+    if message_text == '@status':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='This is keyword for @status!'))
+    elif message_text == '@location':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='This is keyword for @location!'))
+    elif message_text == '@register':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='This is keyword for @register!'))
+    elif message_text == '@message':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='This is keyword for @message!'))
     else:
         line_bot_api.reply_message(
             event.reply_token,
