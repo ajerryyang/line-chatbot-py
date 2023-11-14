@@ -39,10 +39,23 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='This is keyword for @register!'))
-    elif message_text == '@message':
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text='This is keyword for @message!'))
+    elif message_text == 'hi':
+        line_bot_api.push_message('你的 user ID', TemplateSendMessage(
+        alt_text='ConfirmTemplate',
+        template=ConfirmTemplate(
+                text='你好嗎？',
+                actions=[
+                    MessageAction(
+                        label='好喔',
+                        text='好喔'
+                    ),
+                    MessageAction(
+                        label='好喔',
+                        text='不好喔'
+                    )
+                ]
+            )
+        ))
     else:
         line_bot_api.reply_message(
             event.reply_token,
